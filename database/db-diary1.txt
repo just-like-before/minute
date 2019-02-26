@@ -1,0 +1,15 @@
+1 mysql你了解哪几种
+MyISAM和InnoDB
+MyISAM存储引擎是MySQL5.5之前的默认的存储引擎，支持全文索引，不是事物安全的，而且不支持外键。MyISAM存储引擎与其他数据库不同的地方在于它的缓冲池中缓存(cache)索引文件，而不是缓冲数据文件。MyISAM存储引擎表在磁盘上由三个文件组成，frm存储表格结构，myi(MYIndex)存储索引，myd(MYdata)存储数据。
+InnoDB存储引擎是MySQL5.5开始默认使用的存储引擎，是第一个支持整个ACID操作的MySQL存储引擎。其特点是行锁设计，事物和外键，支持MVCC(Multi Version Concurrency Control-多版本并发控制)，提供一致性非锁定读。
+2 MyISAM和InnoDB的区别
+从事务这个方面来讲，MyISAM存储引擎不支持事务，InnoDB是事务安全的存储引擎。
+MyISAM锁的粒度是表锁，而InnoDB支持行级锁定。
+MyISAM支持全文索引，InnoDB不支持全文索引。
+MyISAM相对简单，它的查询效率要优于InnoDB，小型应用可以考虑使用MyISAM。
+对于count操作MyISAM保存表的行数，InnoDB只能进行遍历查询。
+MyISAM表保存成文件的形式，在跨平台数据转移中MyISAM会省去不少的麻烦。
+InnoDB比MyISAM更加的安全，可以在保证数据不丢失的情况，切换非事物表到事务表。
+MyISAM数据和索引分别存储在不同的文件中，InnoDB数据和索引在一起。
+InnoDB支持MVCC，MyISAM不支持。
+MyISAM和InnoDB在应用场景上也是不同的，MyISAM管理非事务表，提供高速检索，以及全文搜索能力，如果应用中需要执行大量的select查询，那么MyISAM是更好的选择。InnoDB支持事务，行级锁定，如果应用中需要执行大量insert和update操作，则应该使用InnoDB，可以提高多用户并发操作性能。
