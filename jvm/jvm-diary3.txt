@@ -1,0 +1,2 @@
+1 java虚拟机如何判断两个类是相同的
+Java虚拟机不仅要看类的全名是否相同，还要看加载此类的加载器是否是同一个加载器。只有两者都相同的情况下，才认为这个类是相同的。即使是同样的字节代码，被不同的类加载器，加载器之后所得到的类，也是不同的。比如说一个java类com.example.Sample，编译之后生成字节码文件Sample.class。两个不同的类加载器ClassLoaderA和ClassLoaderB分别读取Sample.class文件。并定义出两个java.lang.Class的实例来表示这个类。这两个实例是不相同的。对java虚拟机来说，这是两个不相同的类。试图将这两个类产生的对象进行赋值，会抛出运行时异常ClassCastException。
